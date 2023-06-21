@@ -136,9 +136,10 @@
 //        System.out.println(sb.toString());
 //    }
 //}
+
 import java.util.Scanner;
 
-public class Main{
+public class Main {
     static int N, M;
     static int[] selected;
     static StringBuilder sb = new StringBuilder();
@@ -152,22 +153,24 @@ public class Main{
     }
 
     static void recursiveSol(int k) {
-        if (k == M+1) {
-            for (int i = 1; i <= M; i ++) {
-                sb.append(selected[k]).append(' ');
+        if (k == M + 1) {
+            for (int i = 1; i <= M; i++) {
+                sb.append(selected[i]).append(' ');
             }
             sb.append('\n');
-        }
-        else {
-            for (int i = 1; i <= N; i++) {
+        } else {
+            for (int i = selected[k-1] + 1; i <= N; i++) {
                 selected[k] = i;
-                recursiveSol(k+1);
+                recursiveSol(k + 1);
                 selected[k] = 0;
             }
         }
     }
 
     public static void main(String[] args) {
+        input();
+        recursiveSol(1);
 
+        System.out.println(sb.toString());
     }
 }
