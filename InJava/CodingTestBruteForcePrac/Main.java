@@ -1,5 +1,5 @@
 import java.util.Scanner;
-
+// 14888
 public class Main {
     static int N, max, min;
     static int[] nums, operators, order;
