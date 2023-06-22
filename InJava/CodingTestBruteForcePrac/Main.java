@@ -1,50 +1,54 @@
 import java.util.Scanner;
 
 public class Main {
-//    static int N;
-//    static int[] M;
-//    static int[] arithmetic;
-    static int N;
-    static int M;
-    static int[] selected;
+    static int N, max, min;
+    static int[] nums, operators, order;
     static StringBuilder sb = new StringBuilder();
 
     static void input(){
         Scanner sc = new Scanner(System.in);
         N = sc.nextInt();
-        M = sc.nextInt();
-//        String temp = sc.next();
-//        String tempTwo = sc.next();
-//
-//        for (int i = 0; i < N; i++) {
-//
-//        }
-//
-//        for (int i = 0; i < 4; i++) {
-//
-//        }
-        selected = new int[M+1];
+        nums = new int[N+1];
+        operators = new int[5];
+        order = new int[N+1];
+
+        for (int i = 1; i <= N; i++) nums[i] = sc.nextInt();
+        for (int i = 1; i <= 4; i++) operators[i] = sc.nextInt();
+
+        // Answers
+        max = Integer.MIN_VALUE;
+        min = Integer.MAX_VALUE;
+    }
+
+    static int calculator() {
+        int value = nums[1];
+        for (int i=1; i <= N; i++) {
+            // +
+            if (order[i] == 1) value = value + nums[i+1];
+            // -
+            if (order[i] == 2) value = value - nums[i+1];
+            // *
+            if (order[i] == 3) value = value * nums[i+1];
+            // /
+            if (order[i] == 4) value = value / nums[i+1];
+        }
+        return value;
     }
 
     static void recursiveSol(int k){
-        if (k == M+1) {
-//            for (int i = 1; i <= M.length; i++) {
-//                sb.append(arithmetic[i]).append(' ');
-//            }
-            for (int i = 1; i <= M; i++){
-                sb.append(selected[i]).append(' ');
-            }
-            sb.append("\n");
+        if (k == N) {
+            int value = calculator();
+            max = Math.max(max, value);
+            min = Math.min(min, value);
         } else {
-//            for (int i = 1; i <= arithmetic.length; i++ ) {
-//                selected[k] = i;
-//                recursiveSol(k+1);
-//                selected[k] = 0;
-//            }
-            for (int i = 1; i <= N; i++) {
-                selected[k] = i;
-                recursiveSol(k+1);
-                selected[k] = 0;
+            for (int cand = 1; cand <= 4; cand++) {
+                if (operators[cand] >= 1) {
+                    operators[cand]--;
+                    order[k] = cand;
+                    recursiveSol(k+1);
+                    operators[cand]++;
+                    order[k] = 0;
+                }
             }
         }
     }
@@ -52,6 +56,7 @@ public class Main {
     public static void main(String[] args) {
         input();
         recursiveSol(1);
+        sb.append(max).append('\n').append(min);
         System.out.println(sb.toString());
     }
 }
