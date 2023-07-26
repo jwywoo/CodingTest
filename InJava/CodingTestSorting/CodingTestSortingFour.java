@@ -3,6 +3,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Scanner;
 
+// 1302
 public class CodingTestSortingFour {
     static class Item implements Comparable<Item>{
         public Item(String title, int sold) {
@@ -18,7 +19,6 @@ public class CodingTestSortingFour {
             }
             return o.sold- this.sold;
         }
-
     }
 
     public static void main(String[] args){
