@@ -26,9 +26,9 @@ public class CodingTestSortingSeven {
         }
 
         Arrays.sort(meetings);
-//        for (int i = 0; i < N; i++) {
-//            System.out.println(meetings[i].start + " " + meetings[i].end);
-//        }
+        for (int i = 0; i < N; i++) {
+            System.out.println(meetings[i].start + " " + meetings[i].end);
+        }
 
         int count = 0, ended = 0;
         for (int i = 0; i < N; i++)
