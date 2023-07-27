@@ -1,5 +1,5 @@
 import java.util.*;
-
+//2910
 public class CodingTestSortingSix {
     static class Number implements Comparable<Number> {
         public Number(int num, int freq, int index) {
